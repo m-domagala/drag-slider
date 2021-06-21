@@ -7,8 +7,8 @@ module.exports = {
  mode: 'production',
  entry: './src/main.js',
  output: {
-  path: path.resolve(__dirname, 'build'),
-  filename: 'bundle.js',
+  path: path.resolve(__dirname, 'docs'),
+  filename: 'bundle-[contenthash:4].js',
  },
  module: {
   rules: [
@@ -63,7 +63,7 @@ module.exports = {
    filename: 'index.html',
   }),
   new MiniCssExtractPlugin({
-   filename: 'bundle.css',
+   filename: 'bundle-[contenthash:4].css',
   }),
  ],
 };
