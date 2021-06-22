@@ -1,48 +1,21 @@
 const divider = document.querySelector('.slider__divider');
 const handle = document.querySelector('.slider__handle');
-const img1 = document.querySelector('.slider__image--1');
-const img2 = document.querySelector('.slider__image--2');
-const img3 = document.querySelector('.slider__image--3');
+const images = [...document.querySelectorAll('.slider__image')];
 const slider = document.querySelector('.slider');
 
-const numberOfImages = 5;
-
 let appHasStarted = false;
-let moveDestination = 'forward';
 let dragging = false;
-let img1Index = 1;
-let img2Index = 2;
-let img3Index = 3;
+const imgIndex = [1, 2, 3];
 let imgSize;
-let mainImgPath = [];
+let moveDestination = 'forward';
 let onTheEdge = false;
 let percentage;
 
-const updateImgIndex = () => {
- img3Index++;
- if (moveDestination === 'backward') {
-  img1Index += 2;
- } else if (moveDestination === 'forward') {
-  img2Index += 2;
- }
-
- if (img1Index > numberOfImages) {
-  if (img1Index === numberOfImages + 1) {
-   img1Index = 1;
-  } else if (img1Index === numberOfImages + 2) {
-   img1Index = 2;
-  }
- }
- if (img2Index > numberOfImages) {
-  if (img2Index === numberOfImages + 1) {
-   img2Index = 1;
-  } else if (img2Index === numberOfImages + 2) {
-   img2Index = 2;
-  }
- }
- if (img3Index > numberOfImages) {
-  img3Index = 1;
- }
+const swapImgUrl = (url) => {
+ images.forEach((image, index) => {
+  url.splice(-7, 1, imgIndex[index].toString());
+  image.style.backgroundImage = url.join('');
+ });
 };
 
 const setImgSize = () => {
@@ -57,30 +30,44 @@ const setImgSize = () => {
  }
 };
 
-const swapImgUrl = () => {
- mainImgPath.splice(-7, 1, img1Index.toString());
- img1.style.backgroundImage = mainImgPath.join('');
- mainImgPath.splice(-7, 1, img2Index.toString());
- img2.style.backgroundImage = mainImgPath.join('');
- mainImgPath.splice(-7, 1, img3Index.toString());
- img3.style.backgroundImage = mainImgPath.join('');
-};
-
 const swapPicture = () => {
- const url = [...window.getComputedStyle(img1).backgroundImage];
+ const url = [...window.getComputedStyle(images[0]).backgroundImage];
  setImgSize();
-
  if (imgSize === 'portrait') {
   url.splice(-8, 1, 'p');
-  mainImgPath = url;
  } else if (imgSize === 'small') {
   url.splice(-8, 1, 's');
-  mainImgPath = url;
  } else if (imgSize === 'large') {
   url.splice(-8, 1, 'l');
-  mainImgPath = url;
  }
- swapImgUrl();
+ swapImgUrl(url);
+};
+
+const updateImgIndex = () => {
+ const numberOfImages = 5;
+ imgIndex[2]++;
+ if (moveDestination === 'backward') {
+  imgIndex[0] += 2;
+ } else if (moveDestination === 'forward') {
+  imgIndex[1] += 2;
+ }
+ if (imgIndex[0] > numberOfImages) {
+  if (imgIndex[0] === numberOfImages + 1) {
+   imgIndex[0] = 1;
+  } else if (imgIndex[0] === numberOfImages + 2) {
+   imgIndex[0] = 2;
+  }
+ }
+ if (imgIndex[1] > numberOfImages) {
+  if (imgIndex[1] === numberOfImages + 1) {
+   imgIndex[1] = 1;
+  } else if (imgIndex[1] === numberOfImages + 2) {
+   imgIndex[1] = 2;
+  }
+ }
+ if (imgIndex[2] > numberOfImages) {
+  imgIndex[2] = 1;
+ }
 };
 
 const setMoveDestination = (percentage) => {
@@ -111,23 +98,21 @@ const move = (clientY, clientX) => {
  if (!imgSize) {
   setImgSize();
  }
-
  if (imgSize === 'portrait') {
   const sliderHeight = slider.offsetHeight;
   const sliderOffsetTop = slider.offsetTop;
   const fixedOffset = getOffset(clientY, sliderHeight, sliderOffsetTop);
   percentage = (fixedOffset / sliderHeight) * 100;
   divider.style.top = `${percentage}%`;
-  img1.style.transform = `translateY(${percentage}%)`;
+  images[0].style.transform = `translateY(${percentage}%)`;
  } else if (imgSize === 'small' || imgSize === 'large') {
   const sliderWidth = slider.offsetWidth;
   const sliderOffsetLeft = slider.offsetLeft;
   const fixedOffset = getOffset(clientX, sliderWidth, sliderOffsetLeft);
   percentage = (fixedOffset / sliderWidth) * 100;
   divider.style.left = `${percentage}%`;
-  img1.style.transform = `translateX(${percentage}%)`;
+  images[0].style.transform = `translateX(${percentage}%)`;
  }
-
  setMoveDestination(percentage);
  if (onTheEdge) {
   onTheEdge = false;
@@ -144,12 +129,12 @@ const resize = () => {
   if ((dividerTop !== '0px' && imgSize === 'small') || (dividerTop !== '0px' && imgSize === 'large')) {
    divider.style.top = '0px';
    divider.style.left = `${percentage}%`;
-   img1.style.transform = `translateX(${percentage}%)`;
+   images[0].style.transform = `translateX(${percentage}%)`;
   }
   if (dividerLeft !== '0px' && imgSize === 'portrait') {
    divider.style.left = '0px';
    divider.style.top = `${percentage}%`;
-   img1.style.transform = `translateY(${percentage}%)`;
+   images[0].style.transform = `translateY(${percentage}%)`;
   }
  }
 };
@@ -177,4 +162,5 @@ window.addEventListener('touchmove', (e) => {
   move(e.touches[0].clientY, e.touches[0].clientX);
  }
 });
+
 window.addEventListener('resize', resize);
