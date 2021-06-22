@@ -56,6 +56,9 @@ module.exports = {
      from: 'src/images',
      to: 'images',
     },
+    {
+     from: 'favicon.png',
+    },
    ],
   }),
   new HtmlWebpackPlugin({
