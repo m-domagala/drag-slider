@@ -70,7 +70,6 @@ body {
 
 .slider-container {
  display: flex;
- flex-direction: column;
  height: 100% - $height-portrait * 2;
  background-color: rgb(30, 30, 30);
  @include portrait-large {
@@ -83,6 +82,7 @@ body {
 
 .slider {
  position: relative;
+ display: flex;
  flex-grow: 1;
  margin: 10% 0;
  border: 1px solid black;
@@ -99,7 +99,7 @@ body {
  }
  &__images-container {
   position: relative;
-  height: 100%;
+  flex-grow: 1;
   overflow: hidden;
  }
  &__image {
