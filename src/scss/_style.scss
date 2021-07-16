@@ -1,5 +1,7 @@
 html,
 body {
+ position: fixed;
+ width: 100%;
  height: 100%;
  overflow: hidden;
  overscroll-behavior: none;
@@ -15,7 +17,7 @@ body {
  margin: 0 auto;
  text-align: center;
  user-select: none;
- font-family: 'Times New Roman', Times, serif;
+ font-family: serif;
  border: 1px solid black;
 }
 
@@ -85,7 +87,8 @@ body {
  display: flex;
  flex-grow: 1;
  margin: 10% 0;
- border: 1px solid black;
+ border-top: 1px solid black;
+ border-bottom: 1px solid black;
  @include portrait-large {
   margin: 5% 0;
  }
@@ -93,6 +96,8 @@ body {
   margin: 0 7%;
   border-top: 0;
   border-bottom: 0;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
  }
  @include landscape-large {
   margin: 0 5%;
@@ -158,19 +163,32 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 55px;
-  height: 55px;
-  line-height: 55px;
-  transform: translate(-50%, -50%) rotate(90deg);
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  font-size: 22px;
-  font-weight: bold;
-  color: rgba(0, 0, 0, 0.5);
-  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.4);
+  border: 2px solid;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   @include landscape {
-   transform: translate(-50%, -50%) rotate(0);
+   transform: translate(-50%, -50%) rotate(90deg);
+  }
+  &-arrow {
+   width: 12px;
+   height: 12px;
+   box-shadow: 2px 2px;
+   &--top {
+    transform: rotate(225deg);
+   }
+   &--bottom {
+    transform: rotate(45deg);
+   }
   }
  }
 }
