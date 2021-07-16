@@ -15,10 +15,7 @@
  "license": "ISC",
  "homepage": "https://github.com/m-domagala/drag-slider#readme",
  "browserslist": [
-  "> 0.5%",
-  "last 2 versions",
-  "Firefox ESR",
-  "not dead"
+  "> 0.25%"
  ],
  "devDependencies": {
   "@babel/core": "^7.14.3",
