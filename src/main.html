@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Drag Slider</title>
-  <meta name="description" content="Responsible JavaScript picture drag slider" />
+  <meta name="description" content="Responsive JavaScript picture drag slider" />
   <meta name="keywords" content="HTML, CSS, SASS, SCSS, BEM, RWD, JavaScript, Webpack" />
   <meta name="author" content="Michal Domagala" />
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -12,7 +12,6 @@
 
  <body>
   <div class="wrapper">
-
    <header class="header">
     <h1 class="header__title">Drag Slider</h1>
    </header>
@@ -25,7 +24,10 @@
       <div class="slider__image slider__image--3"></div>
      </div>
      <div class="slider__divider">
-      <p class="slider__handle">&#10094 &#10095</p>
+      <div class="slider__handle">
+       <div class="slider__handle-arrow slider__handle-arrow--top"></div>
+       <div class="slider__handle-arrow slider__handle-arrow--bottom"></div>
+      </div>
      </div>
     </div>
    </main>
