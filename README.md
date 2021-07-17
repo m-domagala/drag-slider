@@ -36,9 +36,9 @@ jpg, png, svg, gif
 - 's' for small landscape
 - 'l' for large landscape
 
-#### Replace pictures in 'src/images' directory and name them as in the example:
+#### Replace pictures in 'src/images' directory and name them as in the example below:
 
 - 3 pictures - p1, s1, l1, p2, s2, l2, p3, s3, l3
 - 9 pictures - p1, s1, l1, ..., p9, s9, l9
 
-#### If the number of pictures is different than default 5, change 'numberOfImages' variable in src/js/slider.js file
+#### If the number of pictures is different than default 5, change 'numberOfImages' variable in 'src/js/slider.js' file
